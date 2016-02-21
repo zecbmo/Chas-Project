@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//keep colours in order.. first four are skin colours
 public enum Colours {PINK, WHITE, YELLOW, GREY, BROWN, BLUE, RED, GREEN,  PURPLE,  ORANGE };
 public enum Similarity {NONE, SIMILAR, VERY_SIMILAR, VERY_VERY_SIMILAR  };
 						//none less than half similar
@@ -89,8 +90,9 @@ public class GameController : MonoBehaviour
 	public string[] middle_names;
 	public string[] last_names;
 
+	public GameObject villain_prefab;
 
-	private EvilGuy mainVillain_ = new EvilGuy();
+	private EvilGuy main_villain_ = new EvilGuy();
 
 	private int num_eyes_ = 5; //!!the Amouont of images for each needs to be hard coded needs to be update when more images are added!!
 	private int num_hats_ = 5;
@@ -100,18 +102,25 @@ public class GameController : MonoBehaviour
 	private int total_villains_;
 	private int min_villains_;
 
+	private GameObject new_villain;
+
 	void Start () 
 	{
-		RandomiseVillain(mainVillain_);
+		RandomiseVillain(ref main_villain_);
+
 	}
 	
 
 	void Update () 
 	{
 		//checking git
+
+		TestVillainCreation();
+		int seven = 9;
+
 	}
 
-	private void RandomiseVillain(EvilGuy villain)
+	private void RandomiseVillain(ref EvilGuy villain)
 	{
 		villain.name = GetRandomName();
 		villain.clothes_colour = (Colours)Random.Range(0,10);
@@ -132,4 +141,25 @@ public class GameController : MonoBehaviour
 		return newName;
 
 	}
+
+	private void TestVillainCreation()
+	{
+		if(Input.GetMouseButtonDown(0))
+		{
+			RandomiseVillain(ref main_villain_);
+			new_villain = (GameObject)Instantiate(villain_prefab, transform.position, Quaternion.identity);
+			EvilGuyBase script = new_villain.GetComponent<EvilGuyBase>();
+			script.Init(ref main_villain_);
+
+
+		}
+		if(Input.GetMouseButtonDown(1))
+		{
+			Destroy(new_villain);
+
+
+		}
+	}
+
+
 }

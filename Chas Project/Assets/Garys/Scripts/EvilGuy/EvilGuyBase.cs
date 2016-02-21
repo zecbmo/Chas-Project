@@ -1,43 +1,93 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EvilGuyBase : MonoBehaviour {
+public class EvilGuyBase : MonoBehaviour 
+{
 
-	[HideInInspector]
-	public enum Colours {BROWN, BLUE, RED, GREEN, YELLOW, PURPLE, PINK, ORANGE, GREY, WHITE };
+	//public enum Colours {PINK, WHITE, YELLOW, GREY, BROWN, BLUE, RED, GREEN,  PURPLE,  ORANGE };
 
-	[HideInInspector]
-	public Colours clothesColour;
+	[Header("Clothes Colours")]
+	public Color brown; 
+	public Color blue;
+	public Color red; 
+	public Color green;
+	public Color yellow;
+	public Color purple;
+	public Color pink; 
+	public Color orange; 
+	public Color grey; 
+	public Color white;
 
-	[HideInInspector]
-	public Color brown = new Color(1.0f, 0.0f, 0.0f);
+	[Header("Skin Colours")]
+	public Color skin_pink;
+	public Color skin_white;
+	public Color skin_yellow;
+	public Color skin_grey;
 
-	[HideInInspector]
-	public Color blue = new Color(0.0f, 0.0f, 1.0f);
+	private EvilGuy this_villain_;
+	private Color clothes_colour;
 
-	[HideInInspector]
-	public Color red = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color green = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color yellow = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color purple = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color pink = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color orange = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color grey = new Color(1.0f, 0.0f, 0.0f);
-
-	[HideInInspector]
-	public Color white = new Color(1.0f, 1.0f, 1.0f);
+	void Start()
+	{
 
 
+	}
+
+	void Update()
+	{
+		//if main enemy
+		//and on screen and person shouting 
+		//win something
+
+	}
+
+	public void Init(ref EvilGuy villain)
+	{
+		//Get info from the controller class
+		this_villain_ =  villain;                                   ///////////WARNING GARY!!!! This line may cause some memory problems
+
+		//set the colours
+		SetClothesColour();
+
+		//update the sprites within this game object
+		SetClothesColoursInChildren();
+
+	}
+
+	void SetClothesColour()
+	{
+		switch(this_villain_.clothes_colour)
+		{
+		case Colours.BROWN: clothes_colour = brown;
+			break;
+		case Colours.RED: clothes_colour = red;
+			break;
+		case Colours.BLUE: clothes_colour = blue;
+			break;
+		case Colours.PINK: clothes_colour = pink;
+			break;
+		case Colours.PURPLE: clothes_colour = purple;
+			break;
+		case Colours.YELLOW: clothes_colour = yellow;
+			break;
+		case Colours.GREEN: clothes_colour = green;
+			break;
+		case Colours.GREY: clothes_colour = grey;
+			break;
+		case Colours.WHITE: clothes_colour = white;
+			break;
+		case Colours.ORANGE: clothes_colour = orange; 
+			break;
+		}
+	}
+
+	void SetClothesColoursInChildren()
+	{
+		Component[] clothes = GetComponentsInChildren<BaseClothes>();
+	
+		foreach(BaseClothes item in clothes )
+		{
+			item.SetColour(clothes_colour);
+		}
+	}
 }
