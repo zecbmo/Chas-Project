@@ -67,7 +67,7 @@ public struct EvilGuy
 		return false;
 	}
 
-	public Similarity CheckIfSimilar()
+	public Similarity CheckIfSimilar(EvilGuy rhs)
 	{
 		Similarity amount = Similarity.NONE;
 
@@ -84,9 +84,15 @@ public class GameController : MonoBehaviour
 
 	public enum Difficulty{EASY, MEDIUM, HARD, NIGHTMARE};
 	public Difficulty difficulty = Difficulty.EASY;
+
+	public string[] first_names;
+	public string[] middle_names;
+	public string[] last_names;
+
+
 	private EvilGuy mainVillain_ = new EvilGuy();
 
-	private int num_eyes_ = 5;
+	private int num_eyes_ = 5; //!!the Amouont of images for each needs to be hard coded needs to be update when more images are added!!
 	private int num_hats_ = 5;
 	private int num_moustaches_ = 5;
 	private int num_weapons_ = 5;
@@ -112,10 +118,10 @@ public class GameController : MonoBehaviour
 		villain.skin_colour = (Colours)Random.Range(0,4);
 		villain.shoe_colour = (Colours)Random.Range(0,10);
 		villain.cape_colour = (Colours)Random.Range(0,10);
-		villain.eye_type = Random.Range(0, num_eyes_ + 1);
-		villain.hat_type = Random.Range(0, num_hats_ + 1);
-		villain.moustache_type = Random.Range(0, num_moustaches_ + 1);
-		villain.weapon_type = Random.Range(0, num_weapons_ + 1);
+		villain.eye_type = Random.Range(0, num_eyes_);
+		villain.hat_type = Random.Range(0, num_hats_);
+		villain.moustache_type = Random.Range(0, num_moustaches_);
+		villain.weapon_type = Random.Range(0, num_weapons_ );
 	}
 	private string GetRandomName()
 	{
