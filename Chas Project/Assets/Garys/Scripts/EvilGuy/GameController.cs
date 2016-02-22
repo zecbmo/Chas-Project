@@ -74,6 +74,8 @@ public struct EvilGuy
 
 
 		//TODO:: shit inbetween
+		//added to see if branch is working
+
 
 		return amount;
 	}
