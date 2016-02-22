@@ -68,7 +68,7 @@ public struct EvilGuy
 		return false;
 	}
 
-	public Similarity CheckIfSimilar(EvilGuy rhs)
+	public Similarity HowSimilar(EvilGuy rhs)
 	{
 		Similarity amount = Similarity.NONE;
 
@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour
 			RandomiseVillain(ref main_villain_);
 			new_villain = (GameObject)Instantiate(villain_prefab, transform.position, Quaternion.identity);
 			EvilGuyBase script = new_villain.GetComponent<EvilGuyBase>();
-			script.Init(ref main_villain_);
+			script.Init(main_villain_);
 
 
 		}

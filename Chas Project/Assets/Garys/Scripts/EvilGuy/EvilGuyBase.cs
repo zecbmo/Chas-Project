@@ -41,7 +41,7 @@ public class EvilGuyBase : MonoBehaviour
 
 	}
 
-	public void Init(ref EvilGuy villain)
+	public void Init(EvilGuy villain)
 	{
 		//Get info from the controller class
 		this_villain_ =  villain;                                   ///////////WARNING GARY!!!! This line may cause some memory problems
