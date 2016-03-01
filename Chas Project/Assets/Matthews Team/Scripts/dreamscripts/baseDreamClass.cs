@@ -4,14 +4,14 @@ using System.Collections;
 public class baseDreamClass : MonoBehaviour
 {
     
-    public int pointaValue;
+    public int pointsValue;
     public int moveSpeed;
 
     [HideInInspector]
     public int Points
     {
-        get { return pointaValue; }
-        set { pointaValue = value; }
+        get { return pointsValue; }
+        set { pointsValue = value; }
     }
 
     [HideInInspector]
@@ -27,7 +27,7 @@ public class baseDreamClass : MonoBehaviour
 
     void Start ()
     {
-        Points = pointaValue;
+        Points = pointsValue;
         Speed = moveSpeed;
 
     }
@@ -35,14 +35,6 @@ public class baseDreamClass : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
-            if (hit.collider == this.gameObject.GetComponent<Collider2D>())
-            {
-                Destroy(this.gameObject);
-            }
-        }
 
     }
 
