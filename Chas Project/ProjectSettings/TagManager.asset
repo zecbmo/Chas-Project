@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spawner
   - ScoreTrack
+  - GameUtility
   layers:
   - Default
   - TransparentFX

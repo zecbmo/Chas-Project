@@ -7,7 +7,7 @@ public class DisplayGUI : MonoBehaviour {
     // Use this for initialization
 	void Start ()
     {
-        score = GameObject.FindGameObjectWithTag("ScoreTrack");
+        score = GameObject.FindGameObjectWithTag("GameUtility");
 
     }
 	

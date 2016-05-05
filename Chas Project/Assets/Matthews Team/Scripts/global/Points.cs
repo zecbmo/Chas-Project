@@ -3,17 +3,25 @@ using System.Collections;
 
 public class Points : MonoBehaviour {
 
-    private int score;
+    private int score_;
+    private int life_;
+
     public int Score
     {
-        get { return score; }
-        set { score = value; }
+        get { return score_; }
+        set { score_ = value; }
     }
-	// Use this for initialization
-	void Start ()
+    public int Life
+    {
+        get { return life_; }
+        set { life_ = value; }
+    }
+    // Use this for initialization
+    void Start ()
     {
         Score = 0;
-	}
+        Life = 5;
+    }
 	
 	// Update is called once per frame
 	void Update ()

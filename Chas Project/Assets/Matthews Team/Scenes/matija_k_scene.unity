@@ -187,15 +187,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b96bd51180fc643bbe9467818e9554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  goodDreamTimer: 2
-  badDreamTimer: 3
-  specialDreamTimer: 14
-  goodDreams:
+  spawn_: {fileID: 0}
+  spawn_time_: 3
+  min_time_: 1
+  max_time_: 2
+  good_dream_chance_: 60
+  bad_dream_chance_: 30
+  special_dream_chance_: 10
+  good_dreams_:
   - {fileID: 140848, guid: 2ccf08df49c9b8c479b3f4180c6bab43, type: 2}
-  badDreams:
+  bad_dreams_:
   - {fileID: 166906, guid: f9f2fd51aa5fb104fa226f3ff041484f, type: 2}
-  specialDreams:
+  special_dreams_:
   - {fileID: 175502, guid: b819709272c382d478f596cd8f468a66, type: 2}
 --- !u!4 &289648145
 Transform:
@@ -331,8 +334,8 @@ GameObject:
   - 4: {fileID: 1768374702}
   - 114: {fileID: 1768374701}
   m_Layer: 0
-  m_Name: ScoreTrack
-  m_TagString: ScoreTrack
+  m_Name: GameUtility
+  m_TagString: GameUtility
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
