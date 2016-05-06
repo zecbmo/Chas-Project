@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Points : MonoBehaviour {
+public class GameUtility : MonoBehaviour {
 
     private int score_;
     private int life_;
+
+    public GameObject[] targets_;
 
     public int Score
     {
@@ -21,6 +23,8 @@ public class Points : MonoBehaviour {
     {
         Score = 0;
         Life = 5;
+        targets_ = GameObject.FindGameObjectsWithTag("Target");
+        Debug.Log(targets_[0]);
     }
 	
 	// Update is called once per frame
