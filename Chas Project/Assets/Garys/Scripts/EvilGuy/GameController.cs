@@ -9,7 +9,7 @@ public enum Similarity {NONE, SIMILAR, VERY_SIMILAR, VERY_VERY_SIMILAR  };
 						//very similar, only three things different
 						//very very similar, only one thing different
 
-public struct EvilGuy 
+public struct EvilGuyStruct //Struct seperate from villian prefab!! - prefab is essentially the visual controller for the evil guy
 {
 	//this will be the main controller for the villains
 	//it acts as a helper for initialising the villain prefabs
@@ -19,12 +19,13 @@ public struct EvilGuy
 	public Colours skin_colour;
 	public Colours shoe_colour;
 	public Colours cape_colour;
-	public int eye_type;
+    public Colours hat_colour;
+    public int eye_type;
 	public int hat_type;
 	public int moustache_type;
 	public int weapon_type;
 
-	public static bool operator ==(EvilGuy lhs, EvilGuy rhs)
+	public static bool operator ==(EvilGuyStruct lhs, EvilGuyStruct rhs)
 	{
 		if(lhs.clothes_colour != rhs.clothes_colour)
 		{
@@ -46,7 +47,11 @@ public struct EvilGuy
 		{
 			return false;
 		}
-		if(lhs.hat_type != rhs.hat_type)
+        if (lhs.hat_colour != rhs.hat_colour)
+        {
+            return false;
+        }
+        if (lhs.hat_type != rhs.hat_type)
 		{
 			return false;
 		}
@@ -62,13 +67,13 @@ public struct EvilGuy
 		return true;
 	}
 
-	public static bool operator !=(EvilGuy lhs, EvilGuy rhs)
+	public static bool operator !=(EvilGuyStruct lhs, EvilGuyStruct rhs)
 	{
 		//dont use this
 		return false;
 	}
 
-	public Similarity HowSimilar(EvilGuy rhs)
+	public Similarity HowSimilar(EvilGuyStruct rhs)
 	{
 		Similarity amount = Similarity.NONE;
 
@@ -76,6 +81,7 @@ public struct EvilGuy
 		//TODO:: shit inbetween
 		//added to see if branch is working
 
+        //add similarities to get a score
 
 		return amount;
 	}
@@ -94,7 +100,7 @@ public class GameController : MonoBehaviour
 
 	public GameObject villain_prefab;
 
-	private EvilGuy main_villain_ = new EvilGuy();
+	private EvilGuyStruct main_villain_ = new EvilGuyStruct();
 
 	private int num_eyes_ = 5; //!!the Amouont of images for each needs to be hard coded needs to be update when more images are added!!
 	private int num_hats_ = 5;
@@ -122,14 +128,15 @@ public class GameController : MonoBehaviour
 
 	}
 
-	private void RandomiseVillain(ref EvilGuy villain)
+	private void RandomiseVillain(ref EvilGuyStruct villain)
 	{
 		villain.name = GetRandomName();
 		villain.clothes_colour = (Colours)Random.Range(0,10);
 		villain.skin_colour = (Colours)Random.Range(0,4);
 		villain.shoe_colour = (Colours)Random.Range(0,10);
 		villain.cape_colour = (Colours)Random.Range(0,10);
-		villain.eye_type = Random.Range(0, num_eyes_);
+        villain.hat_colour = (Colours)Random.Range(0, 10);
+        villain.eye_type = Random.Range(0, num_eyes_);
 		villain.hat_type = Random.Range(0, num_hats_);
 		villain.moustache_type = Random.Range(0, num_moustaches_);
 		villain.weapon_type = Random.Range(0, num_weapons_ );
