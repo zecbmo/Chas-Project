@@ -20,5 +20,6 @@ public class DisplayGUI : MonoBehaviour {
     void OnGUI()
     { 
         GUILayout.Label("Score = " + score.GetComponent<GameUtility>().Score);
+        GUILayout.Label("Life = " + score.GetComponent<GameUtility>().Life);
     }
 }

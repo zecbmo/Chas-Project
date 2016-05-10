@@ -3,6 +3,10 @@ using System.Collections;
 
 public class DreamUtil : BaseDreamClass
 {
+    public float poor_hit_;
+    public float good_hit_;
+    public float perfect_hit_;
+
     [HideInInspector]
     GameObject game_utility_;
 
@@ -15,9 +19,17 @@ public class DreamUtil : BaseDreamClass
     // Use this for initialization
     void Start ()
     {
+          
         game_utility_ = GameObject.FindGameObjectWithTag("GameUtility");
-        //moves the dream
-        this.GetComponent<Rigidbody2D>().velocity = (this.transform.up * this.Speed);
+
+        //calculates the direcion which it sould go
+        int size_ = game_utility_.GetComponent<GameUtility>().targets_.Length;
+        this.Target = Random.Range(0, size_);
+        target_ = game_utility_.GetComponent<GameUtility>().targets_[this.Target];
+        Vector3 direction_ = target_.transform.position -  this.transform.position;
+
+       //moves the dream
+       this.GetComponent<Rigidbody2D>().velocity = (direction_.normalized * this.Speed);
 	}
 	
 	// Update is called once per frame
@@ -31,10 +43,27 @@ public class DreamUtil : BaseDreamClass
 
             if (hit.collider == this.gameObject.GetComponent<Collider2D>() && is_destroyable_)
             {
-                game_utility_.GetComponent<GameUtility>().Score = (game_utility_.GetComponent<GameUtility>().Score + this.Points);
-                //last working
-                Vector3 distance = this.transform.position - game_utility_.GetComponent<GameUtility>().targets_[0].transform.position;
-                Destroy(this.gameObject);
+                
+                //calculets how far away it is from the colider center and adds poits acordingly 
+
+                Vector3 distance_vector_ = this.transform.position - game_utility_.GetComponent<GameUtility>().targets_[this.Target].transform.position;
+                float distance_ = distance_vector_.magnitude;
+                if (distance_ < poor_hit_ && distance_ > good_hit_)
+                {
+                    game_utility_.GetComponent<GameUtility>().Score = (game_utility_.GetComponent<GameUtility>().Score + this.PointsMin);
+                    Destroy(this.gameObject);
+                }
+                else if (distance_ < good_hit_ && distance_ > perfect_hit_)
+                {
+                    game_utility_.GetComponent<GameUtility>().Score = (game_utility_.GetComponent<GameUtility>().Score + this.PointsMedium);
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    game_utility_.GetComponent<GameUtility>().Score = (game_utility_.GetComponent<GameUtility>().Score + this.PointsMax);
+                    Destroy(this.gameObject);
+                }
+                
             }
         }
         //Player missed something decrese life
@@ -52,10 +81,6 @@ public class DreamUtil : BaseDreamClass
         }
     }
 
-    void CalculatePoints()
-    {
-
-    }
 
 
 

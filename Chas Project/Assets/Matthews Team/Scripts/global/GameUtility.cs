@@ -24,7 +24,6 @@ public class GameUtility : MonoBehaviour {
         Score = 0;
         Life = 5;
         targets_ = GameObject.FindGameObjectsWithTag("Target");
-        Debug.Log(targets_[0]);
     }
 	
 	// Update is called once per frame
