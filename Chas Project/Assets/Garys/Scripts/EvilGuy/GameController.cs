@@ -24,6 +24,7 @@ public struct EvilGuyStruct //Struct seperate from villian prefab!! - prefab is 
 	public int hat_type;
 	public int moustache_type;
 	public int weapon_type;
+    public int overlay_type;
 
 	public static bool operator ==(EvilGuyStruct lhs, EvilGuyStruct rhs)
 	{
@@ -106,8 +107,10 @@ public class GameController : MonoBehaviour
 	private int num_hats_ = 5;
 	private int num_moustaches_ = 5;
 	private int num_weapons_ = 5;
+    private int num_overlays_ = 3;
 
-	private int total_villains_;
+
+    private int total_villains_;
 	private int min_villains_;
 
 	private GameObject new_villain;
@@ -140,8 +143,10 @@ public class GameController : MonoBehaviour
 		villain.hat_type = Random.Range(0, num_hats_);
 		villain.moustache_type = Random.Range(0, num_moustaches_);
 		villain.weapon_type = Random.Range(0, num_weapons_ );
-	}
-	private string GetRandomName()
+        villain.overlay_type = Random.Range(0, num_overlays_);
+
+    }
+    private string GetRandomName()
 	{
 		string newName = "";
 

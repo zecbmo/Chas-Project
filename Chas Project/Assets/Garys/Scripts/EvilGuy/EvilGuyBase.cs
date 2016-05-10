@@ -58,7 +58,7 @@ public class EvilGuyBase : MonoBehaviour
 
 		//update the sprites within this game object
 		SetClothesColoursInChildren();
-
+        SetOverlayInChildren();
 	}
 
 	void SetColours()
@@ -102,6 +102,16 @@ public class EvilGuyBase : MonoBehaviour
                     break;
             }
 		} 
+    }
+    void SetOverlayInChildren()
+    {
+        Component[] parts = GetComponentsInChildren<OverlaySelecter>();
+
+        //Loop through children that colours need modified and set them
+        foreach (OverlaySelecter item in parts)
+        {
+            item.SetOverlay(this_villain_.overlay_type);
+        }
     }
 
     void SetColourFromEnum(ref Color to_change, Colours colour_enum)
