@@ -58,6 +58,7 @@ public class EvilGuyBase : MonoBehaviour
 
 		//update the sprites within this game object
 		SetClothesColoursInChildren();
+        SetTheRandomSprites();
         SetOverlayInChildren();
 	}
 
@@ -106,11 +107,33 @@ public class EvilGuyBase : MonoBehaviour
     void SetOverlayInChildren()
     {
         Component[] parts = GetComponentsInChildren<OverlaySelecter>();
-
-        //Loop through children that colours need modified and set them
+              
         foreach (OverlaySelecter item in parts)
         {
             item.SetOverlay(this_villain_.overlay_type);
+        }
+    }
+    void SetTheRandomSprites()
+    {
+        Component[] parts = GetComponentsInChildren<SpriteSelector>();
+       
+        foreach (SpriteSelector item in parts)
+        {
+
+            if (item.sprite_type == SpriteSelector.Sprite_type.EYES)
+            {
+                item.SetSprite(this_villain_.eye_type);
+            }
+            else if (item.sprite_type == SpriteSelector.Sprite_type.BEARD)
+            {
+                item.SetSprite(this_villain_.moustache_type);
+            }
+            else if (item.sprite_type == SpriteSelector.Sprite_type.WEAPON)
+            {
+                item.SetSprite(this_villain_.weapon_type);
+            }
+
+
         }
     }
 

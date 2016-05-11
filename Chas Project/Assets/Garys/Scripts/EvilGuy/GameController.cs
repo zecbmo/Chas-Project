@@ -103,10 +103,10 @@ public class GameController : MonoBehaviour
 
 	private EvilGuyStruct main_villain_ = new EvilGuyStruct();
 
-	private int num_eyes_ = 5; //!!the Amouont of images for each needs to be hard coded needs to be update when more images are added!!
-	private int num_hats_ = 5;
-	private int num_moustaches_ = 5;
-	private int num_weapons_ = 5;
+	private int num_eyes_ = 3; //!!the Amouont of images for each needs to be hard coded needs to be update when more images are added!!
+	private int num_hats_ = 3;
+	private int num_moustaches_ = 3;
+	private int num_weapons_ = 3;
     private int num_overlays_ = 3;
 
 
