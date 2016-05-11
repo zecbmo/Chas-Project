@@ -7,3 +7,5 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Matthews Team/Scenes/matija_k_scene.unity
+  - enabled: 1
+    path: Assets/Matthews Team/Scenes/end_screen_.unity

@@ -8,6 +8,8 @@ TagManager:
   - ScoreTrack
   - GameUtility
   - Target
+  - Retry
+  - Quit
   layers:
   - Default
   - TransparentFX

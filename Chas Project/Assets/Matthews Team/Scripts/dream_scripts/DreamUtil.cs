@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DreamUtil : BaseDreamClass
 {
@@ -77,7 +78,7 @@ public class DreamUtil : BaseDreamClass
 
         if (game_utility_.GetComponent<GameUtility>().Life == 0)
         {
-            Debug.Log("end game");
+            SceneManager.LoadScene(1);
         }
     }
 
