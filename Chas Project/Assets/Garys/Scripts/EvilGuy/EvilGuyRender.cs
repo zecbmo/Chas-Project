@@ -1,69 +1,93 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EvilGuyBase : MonoBehaviour 
+public class EvilGuyRender : MonoBehaviour
 {
+    //attached to the prefab..will update what is drawn on the prefab
+    //public enum Colours {PINK, WHITE, YELLOW, GREY, BROWN, BLUE, RED, GREEN,  PURPLE,  ORANGE };
+    public enum Direction { LEFT, RIGHT};
+    public enum Anim { WALK, SNEAK, RUN };
 
-	//public enum Colours {PINK, WHITE, YELLOW, GREY, BROWN, BLUE, RED, GREEN,  PURPLE,  ORANGE };
 
-	[Header("Clothes Colours including cape/shoes")]
-	public Color brown; 
-	public Color blue;
-	public Color red; 
-	public Color green;
-	public Color yellow;
-	public Color purple;
-	public Color pink; 
-	public Color orange; 
-	public Color grey; 
-	public Color white;
+    [Header("Clothes Colours including cape/shoes")]
+    public Color brown;
+    public Color blue;
+    public Color red;
+    public Color green;
+    public Color yellow;
+    public Color purple;
+    public Color pink;
+    public Color orange;
+    public Color grey;
+    public Color white;
 
-	[Header("Skin Colours")]
-	public Color skin_pink;
-	public Color skin_white;
-	public Color skin_yellow;
-	public Color skin_grey;
+    [Header("Skin Colours")]
+    public Color skin_pink;
+    public Color skin_white;
+    public Color skin_yellow;
+    public Color skin_grey;
 
-	private EvilGuyStruct this_villain_;
-	private Color clothes_colour;
+    private EvilGuyStruct this_villain_;
+    private Color clothes_colour;
     private Color skin_colour;
     private Color shoe_colour;
     private Color cape_colour;
     private Color hat_colour;
 
+    //for conmtrolling the character on screen
+    private float starting_x;
+    private Direction dir = Direction.LEFT;
 
+    private float speed = 5;
+    private Anim anim = Anim.WALK;
 
+    //distance that it will move before being deleted
+    private float moving_distance = 25;
 
     void Start()
-	{
+    {
+        starting_x = transform.position.x;
 
+    }
 
-	}
+    void FixedUpdate()
+    {
+        //if main enemy
+        //and on screen and person shouting 
+        //win something
+        Move();
 
-	void Update()
-	{
-		//if main enemy
-		//and on screen and person shouting 
-		//win something
+    }
 
-	}
+    public void Init(EvilGuyStruct villain, Direction d, float movement_speed, Anim animation )
+    {
+        //Get info from the controller class
+        this_villain_ = villain;     ///////////WARNING GARY!!!! This line may cause some memory problems0(maybe)
+        dir = d;
+        speed = movement_speed;
+        anim = animation;
 
-	public void Init(EvilGuyStruct villain)
-	{
-		//Get info from the controller class
-		this_villain_ =  villain;     ///////////WARNING GARY!!!! This line may cause some memory problems0(maybe)
+        
 
-		//set the colours
-		SetColours();
+        //set the animation type
+        SetAnimation();
 
-		//update the sprites within this game object
-		SetClothesColoursInChildren();
+        //set the colours
+        SetColours();
+        //update the sprites within this game object
+        SetClothesColoursInChildren();
         SetTheRandomSprites();
         SetOverlayInChildren();
-	}
 
-	void SetColours()
-	{
+        //Set if it is the main villain
+        if (this_villain_.main_villian == true)
+        {
+            GameController.main_guy_onscreen = true;
+        }
+    }
+
+    void SetColours()
+    {
         //clothes
         SetColourFromEnum(ref clothes_colour, this_villain_.clothes_colour);
         //shoes
@@ -78,12 +102,12 @@ public class EvilGuyBase : MonoBehaviour
     }
 
     void SetClothesColoursInChildren()
-	{
-		Component[] parts = GetComponentsInChildren<BaseColourChanger>();
-	
+    {
+        Component[] parts = GetComponentsInChildren<BaseColourChanger>();
+
         //Loop through children that colours need modified and set them
-		foreach(BaseColourChanger item in parts) 
-		{
+        foreach (BaseColourChanger item in parts)
+        {
             switch (item.colour_type)
             {
                 case BaseColourChanger.Colour_Type.CLOTHES:
@@ -102,12 +126,12 @@ public class EvilGuyBase : MonoBehaviour
                     item.SetColour(hat_colour);
                     break;
             }
-		} 
+        }
     }
     void SetOverlayInChildren()
     {
         Component[] parts = GetComponentsInChildren<OverlaySelecter>();
-              
+
         foreach (OverlaySelecter item in parts)
         {
             item.SetOverlay(this_villain_.overlay_type);
@@ -116,7 +140,7 @@ public class EvilGuyBase : MonoBehaviour
     void SetTheRandomSprites()
     {
         Component[] parts = GetComponentsInChildren<SpriteSelector>();
-       
+
         foreach (SpriteSelector item in parts)
         {
 
@@ -180,17 +204,69 @@ public class EvilGuyBase : MonoBehaviour
         {
             case Colours.PINK:
                 to_change = skin_pink;
-                break;         
+                break;
             case Colours.YELLOW:
                 to_change = skin_yellow;
-                break;         
+                break;
             case Colours.GREY:
                 to_change = skin_grey;
                 break;
             case Colours.WHITE:
                 to_change = skin_white;
-                break;                 
+                break;
         }
     }
+    void SetAnimation()
+    {
+        //TODO:        
+        switch (anim)
+        {
+            case Anim.WALK:
+                break;
+            case Anim.SNEAK:
+                break;
+            case Anim.RUN:
+                break;
+
+        }
+
+    }
+
+    public void SetStartingPosition(Vector3 new_pos) //used in spawner when spawned on the right hand side called after int
+    {
+        transform.position = new_pos;
+        transform.localScale = new Vector3(-1, 1, 1);
+        starting_x = new_pos.x;
+    }
+
+    void Move()
+    {
+        switch (dir)
+        {
+            case Direction.LEFT:
+                transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime * speed);
+                if (transform.position.x < starting_x - moving_distance)
+                {
+                    Destroy(gameObject);
+                }
+                break;
+            case Direction.RIGHT:
+                transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime * speed);
+                if (transform.position.x > starting_x + moving_distance)
+                {
+                    Destroy(gameObject);
+                }
+                break;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (this_villain_.main_villian)
+        {
+            GameController.main_guy_onscreen = false;
+        }
+    }
+
 
 }
