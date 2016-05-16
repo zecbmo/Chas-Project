@@ -10,6 +10,8 @@ TagManager:
   - Target
   - Retry
   - Quit
+  - BadDream
+  - Dream
   layers:
   - Default
   - TransparentFX

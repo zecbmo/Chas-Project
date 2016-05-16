@@ -21,5 +21,6 @@ public class DisplayGUI : MonoBehaviour {
     { 
         GUILayout.Label("Score = " + score.GetComponent<GameUtility>().Score);
         GUILayout.Label("Life = " + score.GetComponent<GameUtility>().Life);
+        GUILayout.Label("Combo = " + score.GetComponent<GameUtility>().ComboHits);
     }
 }

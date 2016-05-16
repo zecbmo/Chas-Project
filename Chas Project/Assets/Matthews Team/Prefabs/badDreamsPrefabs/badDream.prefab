@@ -101,14 +101,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed48f002ee95be4e9e68d0ba109dd73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points_value_max_: -1
-  points_value_medium_: -5
+  points_value_max_: -10
+  points_value_medium_: -10
   points_value_min_: -10
   move_speed_: 2
   target_index_: 0
   poor_hit_: 10
   good_hit_: 0.4
   perfect_hit_: 0.1
+  mini_combo_multiplayer_: 0
+  max_combo_multiplayer_: 0
   is_destroyable_: 0
 --- !u!212 &21202878
 SpriteRenderer:
@@ -169,11 +171,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: points_value_max_
-      value: -1
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: points_value_medium_
-      value: -5
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: points_value_min_
