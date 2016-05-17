@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum Difficulty { EASY_0, EASY_1, MEDIUM_0, MEDIUM_1, HARD_0, HARD_1 ,NIGHTMARE_0, NIGHTMARE_1 };
 
 public class GameController : MonoBehaviour 
 {
 
-	public enum Difficulty{EASY, MEDIUM, HARD, NIGHTMARE};
-	public Difficulty difficulty = Difficulty.EASY;
+	//public enum Difficulty{EASY, MEDIUM, HARD, NIGHTMARE};
+	public Difficulty difficulty = Difficulty.EASY_0;
 
 	public string[] first_names;
 	public string[] middle_names;
