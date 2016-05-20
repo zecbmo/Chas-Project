@@ -12,6 +12,7 @@ TagManager:
   - Quit
   - BadDream
   - Dream
+  - MenuPlane
   layers:
   - Default
   - TransparentFX
