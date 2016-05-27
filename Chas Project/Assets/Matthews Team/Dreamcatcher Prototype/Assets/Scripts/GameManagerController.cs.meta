@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f5f97217edaac2f4fb536fa7b7d8e862
+timeCreated: 1455466273
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - goodBubble: {fileID: 164408, guid: 8c809678837be3644846bfe59015789e, type: 2}
+  - badBubble: {fileID: 108526, guid: fa3afa95c7f191e49bc9ded12935c84e, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
