@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public enum MovementType {    
     Land,
@@ -20,4 +21,15 @@ public class MoveItCharacter : MonoBehaviour {
 	void Update () {
 	
 	}
+    void OnCollisionEnter2D(Collision2D collider) {
+        if(collider.gameObject.tag == "Death") {
+            Die();
+        }        
+    }
+
+    void Die() {
+        Debug.Log("death");
+        //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+    }
 }
