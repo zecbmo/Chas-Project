@@ -12,6 +12,8 @@ public class MoveItObstacle : MonoBehaviour {
     [Range(0, 100)]
     public float Weight = 100.0f;
 
+    
+
     public void SetSpeed(float obstacleSpeed) {
         speed = obstacleSpeed;
         speedUpdated = true;
@@ -32,6 +34,7 @@ public class MoveItObstacle : MonoBehaviour {
         if (speedUpdated) {
             characterRigidBody.velocity = (forceDirection * speed);
         }
+       
     }
 
     void OnValidate() {

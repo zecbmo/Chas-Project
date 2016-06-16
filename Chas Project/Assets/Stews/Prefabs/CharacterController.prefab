@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11478024}
-  magnitudeOfForce: 40
+  magnitudeOfForce: 100
 --- !u!114 &11478024
 MonoBehaviour:
   m_ObjectHideFlags: 1

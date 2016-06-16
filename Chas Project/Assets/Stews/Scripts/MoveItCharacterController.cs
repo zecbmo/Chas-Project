@@ -25,7 +25,6 @@ public class MoveItCharacterController : MonoBehaviour {
             }
         }
 	}
-
     Vector2 GetForceDirection() {
         Vector2 force_direction = Vector2.zero;
         switch (character.movementType) {
