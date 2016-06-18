@@ -10,9 +10,7 @@ public class MoveItObstacle : MonoBehaviour {
     public float MinHeightVariation = 0.0f;    
     [Tooltip("Chance of obstacle turning up")]
     [Range(0, 100)]
-    public float Weight = 100.0f;
-
-    
+    public float Weight = 100.0f;    
 
     public void SetSpeed(float obstacleSpeed) {
         speed = obstacleSpeed;
@@ -24,7 +22,14 @@ public class MoveItObstacle : MonoBehaviour {
     private Rigidbody2D characterRigidBody;
 
     bool speedUpdated = false;
-        
+
+    void OnValidate() {
+        // Check if max is higher than min
+        if (MaxHeightVariation < MinHeightVariation) {
+            MaxHeightVariation = MinHeightVariation;
+        }
+    }
+
     void Start() {        
         characterRigidBody = gameObject.GetComponent<Rigidbody2D>();
         characterRigidBody.velocity = (forceDirection * speed);
@@ -33,14 +38,20 @@ public class MoveItObstacle : MonoBehaviour {
     void Update () {
         if (speedUpdated) {
             characterRigidBody.velocity = (forceDirection * speed);
-        }
-       
+        }       
     }
 
-    void OnValidate() {
-        // Check if max is higher than min
-        if (MaxHeightVariation < MinHeightVariation) {
-            MaxHeightVariation = MinHeightVariation;
+    void OnTriggerExit2D(Collider2D collider) {
+        if (collider.gameObject.tag == "GameSpace") {
+            Die();
         }
     }
+
+    void Die() {
+        Destroy(gameObject);
+        //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+    }
+
+    
 }

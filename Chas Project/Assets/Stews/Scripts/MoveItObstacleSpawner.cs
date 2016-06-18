@@ -74,7 +74,7 @@ public class MoveItObstacleSpawner : MonoBehaviour {
 
         currentObstacle = Instantiate(newObstacle, newPos, Quaternion.identity) as MoveItObstacle;
     }
-
+    
     void CreateScene() {
 
     }
