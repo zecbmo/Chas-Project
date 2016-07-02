@@ -47,8 +47,13 @@ public class DreamUtil : BaseDreamClass
 
             if (hit.collider == this.gameObject.GetComponent<Collider2D>() && is_destroyable_)
             {
+                
+                if (this.tag == "BadDream")
+                {
+                    game_utility_.GetComponent<GameUtility>().Life = (game_utility_.GetComponent<GameUtility>().Life - 1);
+                    game_utility_.GetComponent<GameUtility>().ComboHits = 0;
+                }
                 //calculets how far away it is from the colider center and adds poits acordingly if it isnt a perfect hit  it resets combo
-
                 Vector3 distance_vector_ = this.transform.position - game_utility_.GetComponent<GameUtility>().targets_[this.Target].transform.position;
                 float distance_ = distance_vector_.magnitude;
                 if (distance_ < poor_hit_ && distance_ > good_hit_)
@@ -63,7 +68,7 @@ public class DreamUtil : BaseDreamClass
                     game_utility_.GetComponent<GameUtility>().ComboHits = 0;
                     Destroy(this.gameObject);
                 }
-                else
+                else if (this.tag != "BadDream")
                 {
                     //looks if you are in a combo and if you are multiplys points 
 
@@ -81,6 +86,11 @@ public class DreamUtil : BaseDreamClass
                     }
                     game_utility_.GetComponent<GameUtility>().ComboHits++;
 
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    game_utility_.GetComponent<GameUtility>().Score = (game_utility_.GetComponent<GameUtility>().Score + this.PointsMax);
                     Destroy(this.gameObject);
                 }
                 

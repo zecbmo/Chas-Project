@@ -13,6 +13,7 @@ TagManager:
   - BadDream
   - Dream
   - MenuPlane
+  - Life
   layers:
   - Default
   - TransparentFX

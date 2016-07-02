@@ -52,6 +52,9 @@ public class GameUtility : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	
+        if (Score < 0)
+        {
+            Score = 0;
+        }
 	}
 }

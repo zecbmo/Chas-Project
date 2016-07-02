@@ -264,6 +264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4023381df29e44b960a3d7cdcf1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type_: 0
+  scene_to_load_: 0
+  button_text_: Retry
+  position_: {x: 0, y: 0, z: 0}
 --- !u!1 &281716873
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,3 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4023381df29e44b960a3d7cdcf1854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type_: 3
+  scene_to_load_: 0
+  button_text_: 
+  position_: {x: 0, y: 0, z: 0}

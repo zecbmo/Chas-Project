@@ -4,7 +4,7 @@ using System.Collections;
 public class camera : MonoBehaviour {
 
     public float height = 16.0f;
-    public float width = 16.0f;
+    public float width = 9.0f;
     void Start()
     {
         // set the desired aspect ratio (the values in this example are
