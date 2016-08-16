@@ -22,8 +22,8 @@ public class GameController : MonoBehaviour
     static public int num_weapons_ = 3;
     static public int num_overlays_ = 3;
 
-
-
+    static public int spawn_layer = 0;
+   
 
 
 
@@ -45,14 +45,7 @@ public class GameController : MonoBehaviour
       
 	void Update () 
 	{
-        if (main_guy_onscreen)
-        {
-            print("On_screen");
-        }
-        else
-        {
-            print("Not on screen");
-        }
+      
     }
 
 

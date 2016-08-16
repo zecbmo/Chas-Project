@@ -146,7 +146,7 @@ public struct EvilGuyStruct //Struct seperate from villian prefab!! - prefab is 
         return amount;
     }
 
-    public void RandomiseVillain(bool main_villain = false)
+    public void RandomiseVillain(bool main_villain_ = false)
     {
         name = GetRandomName();
         clothes_colour = (Colours)Random.Range(0, 10);
@@ -159,7 +159,7 @@ public struct EvilGuyStruct //Struct seperate from villian prefab!! - prefab is 
         moustache_type = Random.Range(0, GameController.num_moustaches_);
         weapon_type = Random.Range(0, GameController.num_weapons_);
         overlay_type = Random.Range(0, GameController.num_overlays_);
-        main_villian = main_villain;
+        main_villian = main_villain_;
     }
     public string GetRandomName()
     {

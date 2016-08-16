@@ -22,9 +22,12 @@ public class Spawner : MonoBehaviour
     private GameObject new_villain;
 
     private EvilGuyStruct main_villain_ = new EvilGuyStruct();
-    private List<EvilGuyStruct> villain_array = new List<EvilGuyStruct>();
+    //private List<EvilGuyStruct> villain_array = new List<EvilGuyStruct>();
 
     public Difficulty difficulty;
+
+    [Header("Game object of the playbill guy to create main villain image")]
+    public GameObject play_bill_guy;
 
     private int show_villain_count = 0; //used to track if the main villain has not been on screen in a while
 
@@ -126,7 +129,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TestVillainCreationWithSimilarities();
+       // TestVillainCreationWithSimilarities();
 
     }
 
@@ -146,24 +149,27 @@ public class Spawner : MonoBehaviour
 
     void BuildVillainList()
     {
-        EvilGuyStruct temp = new EvilGuyStruct();
-        bool do_once = true;
-        for (int i = 0; i < GameController.total_amount_of_villains; i++)
-        {
-            if (do_once == true)
-            {
-                temp.RandomiseVillain(true);
-                do_once = false;
-            }
-            else
-            {
-                temp.RandomiseVillain();
-            }
-            villain_array.Add(temp);
-        }
+       // EvilGuyStruct temp = new EvilGuyStruct();
+        //bool do_once = true;
+        //for (int i = 0; i < GameController.total_amount_of_villains; i++)
+        //{
+        //    if (do_once == true)
+        //    {
+        //        temp.RandomiseVillain(true);
+        //        do_once = false;
+        //    }
+        //    else
+        //    {
+        //        temp.RandomiseVillain();
+        //    }
+        //    villain_array.Add(temp);
+        //}
 
 
         main_villain_.RandomiseVillain(true);
+        EvilGuyRender script = play_bill_guy.GetComponent<EvilGuyRender>();
+        script.Init(main_villain_, EvilGuyRender.Direction.LEFT, 0, EvilGuyRender.Anim.STILL);
+
     }
 
     void createEnemy()
@@ -174,25 +180,25 @@ public class Spawner : MonoBehaviour
 
 
 
-    private void TestVillainCreation() //Selected from a list of villains
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //RandomiseVillain(ref main_villain_);
-            int temp = Random.Range(0, GameController.total_amount_of_villains);
-            new_villain = (GameObject)Instantiate(villain_prefab, transform.position, Quaternion.identity);
-            EvilGuyRender script = new_villain.GetComponent<EvilGuyRender>();
-            script.Init(villain_array[temp], EvilGuyRender.Direction.LEFT, 5, EvilGuyRender.Anim.WALK);
+    //private void TestVillainCreation() //Selected from a list of villains
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        //RandomiseVillain(ref main_villain_);
+    //        int temp = Random.Range(0, GameController.total_amount_of_villains);
+    //        new_villain = (GameObject)Instantiate(villain_prefab, transform.position, Quaternion.identity);
+    //        EvilGuyRender script = new_villain.GetComponent<EvilGuyRender>();
+    //        script.Init(villain_array[temp], EvilGuyRender.Direction.LEFT, 5, EvilGuyRender.Anim.WALK);
 
 
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Destroy(new_villain);
+    //    }
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Destroy(new_villain);
 
 
-        }
-    }
+    //    }
+    //}
 
     private void TestVillainCreationWithSimilarities() //creates villains/checks if they are too similar
     {
@@ -324,7 +330,7 @@ public class Spawner : MonoBehaviour
             int villain_to_spawn = 0; //select main villain if the count is lest than the max + a random value then spawn the main villain
             int count_max = (int)Random.Range(show_villain_count_max, show_villain_count_max + 10);
 
-            if (show_villain_count < count_max)
+            if (show_villain_count < count_max) //if the villain hasn been spawned lately
             {
                 //pick a random villain if the count is less than the max count
                 villain_to_spawn = (int)Random.Range(0, max_villains); //zero acts as the main villain
@@ -336,10 +342,14 @@ public class Spawner : MonoBehaviour
                 }
             }
 
-            if (show_villain_count > count_max || villain_to_spawn == 0)  //check it is the main villain
+            if ((show_villain_count > count_max || villain_to_spawn == 0) && !GameController.main_guy_onscreen)  //check it is the main villain and he is not already on the screen
             {
                 count = 0;
                 evil_guy_data = main_villain_;
+            }
+            else
+            {
+                evil_guy_data = GenerateVillainStructSimilarity(selected_sim);
             }
 
             //generate the villain on screen
@@ -348,13 +358,13 @@ public class Spawner : MonoBehaviour
 
             //get a directtion
             EvilGuyRender.Direction dir = (EvilGuyRender.Direction)Random.Range(0, 2);
-
+            script.ChangeSortingLayer(); //adds one to the sorting layer each time
             script.Init(evil_guy_data, dir, speed_range, anim_to_use);
 
             //move starting point if facing right
             if (dir == EvilGuyRender.Direction.RIGHT)
             {
-                script.SetStartingPosition(other_spawner.transform.position);
+                script.SetStartingPosition(other_spawner.transform.position);               
             }
 
         }

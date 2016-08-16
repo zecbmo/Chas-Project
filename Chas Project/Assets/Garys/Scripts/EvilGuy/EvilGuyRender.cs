@@ -6,7 +6,7 @@ public class EvilGuyRender : MonoBehaviour
     //attached to the prefab..will update what is drawn on the prefab
     //public enum Colours {PINK, WHITE, YELLOW, GREY, BROWN, BLUE, RED, GREEN,  PURPLE,  ORANGE };
     public enum Direction { LEFT, RIGHT};
-    public enum Anim { WALK, SNEAK, RUN };
+    public enum Anim { WALK, SNEAK, RUN, STILL };
 
 
     [Header("Clothes Colours including cape/shoes")]
@@ -34,6 +34,10 @@ public class EvilGuyRender : MonoBehaviour
     private Color cape_colour;
     private Color hat_colour;
 
+
+    [Header("Is this the GUI prefab")]
+    public bool play_bill_guy_ = false;
+
     //for conmtrolling the character on screen
     private float starting_x;
     private Direction dir = Direction.LEFT;
@@ -55,7 +59,11 @@ public class EvilGuyRender : MonoBehaviour
         //if main enemy
         //and on screen and person shouting 
         //win something
-        Move();
+        if (!play_bill_guy_)
+        {
+            Move();
+        }
+       
 
     }
 
@@ -80,9 +88,10 @@ public class EvilGuyRender : MonoBehaviour
         SetOverlayInChildren();
 
         //Set if it is the main villain
-        if (this_villain_.main_villian == true)
+        if ((this_villain_.main_villian == true) && !play_bill_guy_)
         {
             GameController.main_guy_onscreen = true;
+            print("On_screen");
         }
     }
 
@@ -238,6 +247,43 @@ public class EvilGuyRender : MonoBehaviour
         transform.localScale = new Vector3(-1, 1, 1);
         starting_x = new_pos.x;
     }
+    public void ChangeSortingLayer()
+    {
+        
+        SpriteRenderer[] child_sr = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sr in child_sr)
+        {
+
+
+
+            switch (GameController.spawn_layer)
+            {
+                case 0:
+                    sr.sortingLayerName = "EvilGuy One";
+                    break;
+                case 1:
+                    sr.sortingLayerName = "EvilGuy Two";
+                    break;
+                case 2:
+                    sr.sortingLayerName = "EvilGuy Three";
+                    break;
+                case 3:
+                    sr.sortingLayerName = "EvilGuy Four";
+                    break;
+                case 4:
+                    sr.sortingLayerName = "EvilGuy Five";
+                    break;
+
+            }
+        }
+        GameController.spawn_layer++;
+        if (GameController.spawn_layer == 5)
+        {
+            GameController.spawn_layer = 0;
+        }
+
+    }
 
     void Move()
     {
@@ -265,6 +311,7 @@ public class EvilGuyRender : MonoBehaviour
         if (this_villain_.main_villian)
         {
             GameController.main_guy_onscreen = false;
+            print("off screen");
         }
     }
 
