@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 
 public class MoveItCharacterController : MonoBehaviour {
 
@@ -13,7 +11,7 @@ public class MoveItCharacterController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         forceDirection = GetForceDirection();
-        characterRigidBody = character.GetComponent<Rigidbody2D>();
+        characterRigidBody = character.GetComponent<Rigidbody2D>();       
     }
 	
 	// Update is called once per frame

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class MoveItObstacle : MonoBehaviour {
     [Tooltip("Distance from centre to edge")]
@@ -48,9 +47,7 @@ public class MoveItObstacle : MonoBehaviour {
     }
 
     void Die() {
-        Destroy(gameObject);
-        //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+        Destroy(gameObject);      
     }
 
     

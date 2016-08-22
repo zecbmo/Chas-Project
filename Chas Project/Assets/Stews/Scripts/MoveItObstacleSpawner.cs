@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class MoveItObstacleSpawner : MonoBehaviour {
@@ -38,8 +37,10 @@ public class MoveItObstacleSpawner : MonoBehaviour {
 
     MoveItObstacle GetObstacle() {
         MoveItObstacle newObstacle = null;
+        // random number, that lies within one objects weight value.
         float randomNumber = Random.Range(0.0f, totalWeight);
 
+        // find the object with the matching weight
         foreach (MoveItObstacle obstacle in spawnableObstacles) {
             // find the 
             if (randomNumber < obstacle.Weight) {
@@ -47,11 +48,11 @@ public class MoveItObstacleSpawner : MonoBehaviour {
                 break;
             }
             randomNumber -= obstacle.Weight;
-
         }
         return newObstacle;
     }
 
+    // generate a total weight for all possible objects.
     float GetListTotalWeight() {
         float total = 0.0f;
         foreach (MoveItObstacle obstacle in spawnableObstacles) {
@@ -60,6 +61,8 @@ public class MoveItObstacleSpawner : MonoBehaviour {
         return total;
     }
 
+    // position new obstacle in random position, based off obstacle parrameters, and previous obstacle parameters.
+    // Instanstiate the object.
     void SpawnObstacle(MoveItObstacle newObstacle) {
         Vector3 newPos = transform.position;
         // add random height offset
@@ -70,12 +73,11 @@ public class MoveItObstacleSpawner : MonoBehaviour {
                 newPos.y = currentObstacle.transform.position.y + MaxVariation;
             }
         }
-
-
         currentObstacle = Instantiate(newObstacle, newPos, Quaternion.identity) as MoveItObstacle;
     }
     
     void CreateScene() {
-
+        // TODO: instantiate a full scene of objects so doesnt look barren? or just create start scene in editor?
     }
+    
 }

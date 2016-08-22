@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public enum MovementType {    
@@ -29,6 +28,7 @@ public class MoveItCharacter : MonoBehaviour {
 
     void Die() {
         Debug.Log("death");
+        // TODO: load death scene, or start ui for game over?
         //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
