@@ -18,9 +18,7 @@ public class OrientationControls : MonoBehaviour {
     void OnApplicationFocus(bool focusStatus) {
         if (focusStatus) {
             TestOrientation();            
-        }else {
-            
-        }        
+        }
     }
     
     void TestOrientation() {

@@ -49,6 +49,4 @@ public class MoveItObstacle : MonoBehaviour {
     void Die() {
         Destroy(gameObject);      
     }
-
-    
 }
