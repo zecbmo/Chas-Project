@@ -95,6 +95,6 @@ public class StageSetup : MonoBehaviour {
     }
 
     public void OnValidate() {
-        GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;        
+        //GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;        
     }
 }

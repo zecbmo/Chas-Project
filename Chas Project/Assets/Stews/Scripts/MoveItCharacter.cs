@@ -10,27 +10,32 @@ public enum MovementType {
 public class MoveItCharacter : MonoBehaviour {
 
     public MovementType movementType;
+    [SerializeField]
+    private float oxygenLostRate = 1.0f;
+    [SerializeField]
+    private float oxygenGainRate = 1.0f;
+    private bool canBreath = false;
 
     [SerializeField]
-    private float oxygenLostRate = 0.01f;
-    [SerializeField]
-    private float oxygenGainRate = 0.01f;
-    private float currentOxygen = 1.0f;
-    private float maxOxygen = 1.0f;
-    private bool canBreath = false;
+    private Stat oxygen;
+
+    void Awake() {
+        oxygen.Initialize();
+    }
 
     // Update is called once per frame
     void Update() {
-        if (currentOxygen < 0) {
-            Debug.Log("Death by drowning");
+        if (oxygen.CurrentValue <= 0) {
+            Debug.Log("Death by drowning");          
             Die();
         }
         // Gain or lose oxygen if character can breath
         if (canBreath) {
-            currentOxygen += oxygenGainRate;
+            oxygen.CurrentValue += oxygenGainRate;
         } else {
-            currentOxygen -= oxygenLostRate;
+            oxygen.CurrentValue -= oxygenLostRate;
         }
+
     }
     void OnCollisionEnter2D(Collision2D collider) {
         if (collider.gameObject.tag == "Death") {
@@ -40,13 +45,17 @@ public class MoveItCharacter : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D collider) {
-        canBreath = true;
-        Debug.Log("can breath");
+        if (collider.gameObject.tag == "WaterLevel") {
+            canBreath = true;
+            Debug.Log("can breath");
+        }
     }
 
     public void OnTriggerExit2D(Collider2D collision) {
-        canBreath = false;
-        Debug.Log("cannnot breath");
+        if (collision.gameObject.tag == "WaterLevel") {
+            canBreath = false;
+            Debug.Log("cannnot breath");
+        }
     }
 
     void Die() {
@@ -54,5 +63,10 @@ public class MoveItCharacter : MonoBehaviour {
         // TODO: load death scene, or start ui for game over?
         //SceneManager.UnloadScene(SceneManager.GetActiveScene().buildIndex);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+    }
+
+    public void OnValidate() {
+        // Ensures changes in editor show up in game, as if using oxygen get/setters for max/current        
+        oxygen.Initialize();        
     }
 }
