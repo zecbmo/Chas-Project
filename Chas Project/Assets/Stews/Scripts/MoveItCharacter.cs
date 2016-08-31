@@ -26,7 +26,7 @@ public class MoveItCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (oxygen.CurrentValue <= 0) {
-            Debug.Log("Death by drowning");          
+            Debug.Log("Death by drowning");
             Die();
         }
         // Gain or lose oxygen if character can breath
@@ -41,20 +41,19 @@ public class MoveItCharacter : MonoBehaviour {
         if (collider.gameObject.tag == "Death") {
             Die();
         }
-
     }
 
     public void OnTriggerEnter2D(Collider2D collider) {
         if (collider.gameObject.tag == "WaterLevel") {
-            canBreath = true;
-            Debug.Log("can breath");
+            canBreath = false;
+            Debug.Log("cannnot breath");
         }
-    }
+    }   
 
     public void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.tag == "WaterLevel") {
-            canBreath = false;
-            Debug.Log("cannnot breath");
+            canBreath = true;
+            Debug.Log("can breath");
         }
     }
 
@@ -67,6 +66,6 @@ public class MoveItCharacter : MonoBehaviour {
 
     public void OnValidate() {
         // Ensures changes in editor show up in game, as if using oxygen get/setters for max/current        
-        oxygen.Initialize();        
+        oxygen.Initialize();
     }
 }

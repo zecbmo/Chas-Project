@@ -7,7 +7,7 @@ TagManager:
   - Ground
   - Death
   - GameSpace
-  - Oxygen
+  - WaterLevel
   layers:
   - Default
   - TransparentFX
