@@ -3,19 +3,12 @@ using System.Collections.Generic;
 
 public class MoveItObstacleSpawner : MonoBehaviour {
 
-    [Tooltip("Speed obstacles move at.")]
-    public float ObstacleSpeed = 20.0f;
-    [Tooltip("Maximum height difference of leading obstacle")]
-    public float MaxVariation = 1;
-
     public List<MoveItObstacle> spawnableObstacles = new List<MoveItObstacle>();
 
     private MoveItObstacle currentObstacle = null;
     private MoveItObstacle nextObstacle = null;
     private float totalWeight = 0;
 
-
-    // Use this for initialization
     void Start() {
         totalWeight = GetListTotalWeight();
     }
@@ -60,20 +53,10 @@ public class MoveItObstacleSpawner : MonoBehaviour {
         }
         return total;
     }
-
-    // position new obstacle in random position, based off obstacle parrameters, and previous obstacle parameters.
-    // Instanstiate the object.
-    void SpawnObstacle(MoveItObstacle newObstacle) {
-        Vector3 newPos = transform.position;
-        // add random height offset
-        newPos.y += Random.Range(newObstacle.MinHeightVariation, newObstacle.MaxHeightVariation);
-        if (currentObstacle) {
-            if (newPos.y + MaxVariation > currentObstacle.transform.position.y) {
-                // to big of difference between heights so cap it
-                newPos.y = currentObstacle.transform.position.y + MaxVariation;
-            }
-        }
-        currentObstacle = Instantiate(newObstacle, newPos, Quaternion.identity) as MoveItObstacle;
+    
+    void SpawnObstacle(MoveItObstacle newObstacle) {        
+        // add random height offset                
+        currentObstacle = Instantiate(newObstacle, transform.position + newObstacle.transform.position, Quaternion.identity) as MoveItObstacle;
     }
     
     void CreateScene() {
