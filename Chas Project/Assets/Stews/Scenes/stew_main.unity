@@ -395,6 +395,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11478024, guid: d91bb89b090575740829a455ec7cbaac, type: 2}
+      propertyPath: movementType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d91bb89b090575740829a455ec7cbaac, type: 2}
   m_IsPrefabParent: 0
@@ -496,7 +500,7 @@ GameObject:
   - 68: {fileID: 1924277736}
   m_Layer: 0
   m_Name: WaterLevel
-  m_TagString: Untagged
+  m_TagString: Oxygen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -668,7 +672,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 152836, guid: 0a217c48e6bbb5b4c8b0b82039fd1c43, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146300, guid: 0a217c48e6bbb5b4c8b0b82039fd1c43, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a217c48e6bbb5b4c8b0b82039fd1c43, type: 2}

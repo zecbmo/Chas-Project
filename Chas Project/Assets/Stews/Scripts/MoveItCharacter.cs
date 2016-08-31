@@ -22,6 +22,7 @@ public class MoveItCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (currentOxygen < 0) {
+            Debug.Log("Death by drowning");
             Die();
         }
         // Gain or lose oxygen if character can breath
@@ -38,10 +39,14 @@ public class MoveItCharacter : MonoBehaviour {
 
     }
 
-    public void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Death") {
-            Die();
-        }
+    public void OnTriggerEnter2D(Collider2D collider) {
+        canBreath = true;
+        Debug.Log("can breath");
+    }
+
+    public void OnTriggerExit2D(Collider2D collision) {
+        canBreath = false;
+        Debug.Log("cannnot breath");
     }
 
     void Die() {
