@@ -7,16 +7,26 @@ public class WaterInfo : MonoBehaviour {
     private Transform waterLevel;
     [SerializeField]
     private Transform waterBed;
-    [SerializeField]
+    
     private float waterHeight;
 
-    public void Awake() {
+    public float WaterLevel { get { return waterLevel.transform.position.y; } }
+    public float WaterHeight { get { return waterHeight; } }
+
+    public void CalculateWaterHeight() {
         waterHeight = (waterBed.transform.position - waterLevel.transform.position).magnitude;
+    }
+    public void Awake() {
+        CalculateWaterHeight();
     }
 #if UNITY_EDITOR
     public void Update() {
-        waterHeight = (waterBed.transform.position - waterLevel.transform.position).magnitude;
+        CalculateWaterHeight();
+    }
 
+    public void OnValidate() {
+        CalculateWaterHeight();
     }
 #endif
+
 }

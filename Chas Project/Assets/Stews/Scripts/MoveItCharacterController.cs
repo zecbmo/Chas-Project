@@ -3,7 +3,7 @@
 public class MoveItCharacterController : MonoBehaviour {
 
     public MoveItCharacter character;
-    public float magnitudeOfForce = 1;
+    
     private Vector2 forceDirection;
 
     private Rigidbody2D characterRigidBody;
@@ -15,12 +15,14 @@ public class MoveItCharacterController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {        
+	void Update () {
         for (int i =0; i <Input.touchCount; i++) {            
             if (Input.GetTouch(i).phase == TouchPhase.Began) {                
-                characterRigidBody.velocity = Vector2.zero;
-                characterRigidBody.AddForce(forceDirection * magnitudeOfForce);
+                characterRigidBody.AddForce(forceDirection * character.MagnitudeOfForce);
             }
+        }
+        if (Input.GetMouseButtonDown(0)) {
+            characterRigidBody.AddForce(forceDirection * character.MagnitudeOfForce);
         }
 	}
     Vector2 GetForceDirection() {

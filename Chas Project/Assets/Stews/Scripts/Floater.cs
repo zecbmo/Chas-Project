@@ -2,17 +2,26 @@ using UnityEngine;
 using System.Collections;
 
 public class Floater : MonoBehaviour {
-	public float waterLevel, floatHeight;
-	public Vector3 buoyancyCentreOffset;
-	public float bounceDamp;	
+    [SerializeField]
+    private Transform buoyancyCentreOffset;
+    [SerializeField]
+    private float bounceDamp;    
+    [SerializeField]
+    private WaterInfo waterInfo;
 
-	void FixedUpdate () {
-		Vector3 actionPoint = transform.position + transform.TransformDirection(buoyancyCentreOffset);
-		float forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
+    private Rigidbody2D characterRigidBody;
+
+    void Start() {
+        characterRigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate () {
+		Vector2 actionPoint = transform.position + buoyancyCentreOffset.transform.position;
+		float forceFactor = 1f - ((actionPoint.y - waterInfo.WaterLevel) / waterInfo.WaterHeight);
 		
 		if (forceFactor > 0f) {
-			Vector3 uplift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody>().velocity.y * bounceDamp);
-			GetComponent<Rigidbody>().AddForceAtPosition(uplift, actionPoint);
+			Vector2 uplift = -Physics.gravity * (forceFactor - characterRigidBody.velocity.y * bounceDamp);            
+            characterRigidBody.AddForceAtPosition(uplift, actionPoint,ForceMode2D.Force);
 		}
 	}
 }

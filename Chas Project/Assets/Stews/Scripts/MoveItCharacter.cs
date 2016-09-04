@@ -8,16 +8,19 @@ public enum MovementType {
 }
 
 public class MoveItCharacter : MonoBehaviour {
-
     public MovementType movementType;
+    [SerializeField]
+    private float magnitudeOfForce = 1.0f;
     [SerializeField]
     private float oxygenLostRate = 1.0f;
     [SerializeField]
     private float oxygenGainRate = 1.0f;
-    private bool canBreath = false;
-
+    private bool canBreath = false;    
     [SerializeField]
     private Stat oxygen;
+    
+
+    public float MagnitudeOfForce { get { return magnitudeOfForce; } }
 
     void Awake() {
         oxygen.Initialize();
@@ -36,6 +39,8 @@ public class MoveItCharacter : MonoBehaviour {
             oxygen.CurrentValue -= oxygenLostRate;
         }
 
+        // testing shite
+        
     }
     void OnCollisionEnter2D(Collision2D collider) {
         if (collider.gameObject.tag == "Death") {

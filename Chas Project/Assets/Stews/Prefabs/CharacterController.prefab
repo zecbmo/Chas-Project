@@ -12,8 +12,24 @@ GameObject:
   - 61: {fileID: 6197480}
   - 50: {fileID: 5052970}
   - 114: {fileID: 11478024}
+  - 114: {fileID: 11451992}
   m_Layer: 0
   m_Name: Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &139170
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496036}
+  m_Layer: 0
+  m_Name: bouyancyOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,8 +75,22 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 496036}
   m_Father: {fileID: 433612}
+  m_RootOrder: 0
+--- !u!4 &496036
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 489316}
   m_RootOrder: 0
 --- !u!50 &5052970
 Rigidbody2D:
@@ -72,7 +102,7 @@ Rigidbody2D:
   m_UseAutoMass: 1
   m_Mass: 0.26214403
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 100
   m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -105,7 +135,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11478024}
-  magnitudeOfForce: 100
+--- !u!114 &11451992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2841878914e489abe7d3a43a5e0578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buoyancyCentreOffset: {fileID: 496036}
+  bounceDamp: 0.1
+  waterInfo: {fileID: 0}
 --- !u!114 &11478024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,7 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0e62dfc323a1846ba35976da182daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 0
+  movementType: 1
+  magnitudeOfForce: 200
   oxygenLostRate: 1
   oxygenGainRate: 4
   oxygen:
